@@ -5,7 +5,9 @@ const theme = extendTheme({
     global: {
       // Global styles for the entire application
       body: {
-        bg: "#373A40", // Set the background color for the body
+        bg: "#373A40",
+        fontFamily: '"Poppins", sans-serif',
+        color: "white",
       },
     },
   },
