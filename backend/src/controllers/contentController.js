@@ -1,11 +1,8 @@
-const express = require("express");
-const Movie = require("../models/movie");
-const router = express.Router();
-const mongoose = require("mongoose");
-const natural = require("natural");
+import { Movie } from "../models/movieSchema.js";
+import natural from "natural";
 const TfIdf = natural.TfIdf;
 
-router.get("/recommend", async (req, res) => {
+export const contentRecommend = async (req, res) => {
   const movieId = parseInt(req.query.movie_id);
 
   // Get all movies
@@ -45,6 +42,4 @@ router.get("/recommend", async (req, res) => {
     .map((item) => allMovies[item.index]);
 
   res.json(topSimilarMovies);
-});
-
-module.exports = router;
+};

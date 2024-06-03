@@ -1,10 +1,7 @@
-const express = require("express");
-const Rating = require("../models/rating");
-const Movie = require("../models/movie");
-const router = express.Router();
-const mongoose = require("mongoose");
+import { Rating } from "../models/ratingSchema.js";
+import { Movie } from "../models/movieSchema.js";
 
-router.get("/recommend", async (req, res) => {
+export const collaborativeRecommend = async (req, res) => {
   const userId = parseInt(req.query.user_id);
 
   const allRatings = await Rating.find();
@@ -72,6 +69,4 @@ router.get("/recommend", async (req, res) => {
   const recommendations = await Movie.find({ _id: { $in: movieIds } });
 
   res.json(recommendations);
-});
-
-module.exports = router;
+};
