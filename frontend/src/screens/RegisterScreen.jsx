@@ -1,4 +1,11 @@
-import { Box, Button, FormControl, FormLabel, Input, FormErrorMessage } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -8,14 +15,27 @@ import { registerUser } from "../api/userApi";
 const schema = yup.object().shape({
   fullname: yup.string().required("Full name is required"),
   username: yup.string().required("Username is required"),
-  email: yup.string().email("Invalid email address").required("Email is required"),
-  password: yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
-  cpassword: yup.string().oneOf([yup.ref('password'), null], "Passwords must match").required("Confirm password is required")
+  email: yup
+    .string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
+  cpassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Passwords must match")
+    .required("Confirm password is required"),
 });
 
 const RegisterScreen = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
   const onRegisterHandler = async (data) => {
@@ -31,7 +51,7 @@ const RegisterScreen = () => {
 
   return (
     <Box display={"flex"} justifyContent={"center"} height={"100vh"}>
-      <Box height={"50vh"} width={"80%"}>
+      <Box height={"50vh"} width={"40%"}>
         <Box>
           <Box display={"flex"} flexDirection={"column"} gap={5}>
             <Box as="h1" fontSize="3rem" fontWeight={"bold"} letterSpacing={5}>
