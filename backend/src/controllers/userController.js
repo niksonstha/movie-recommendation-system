@@ -3,6 +3,12 @@ import bcrypt from "bcryptjs";
 
 export const createUser = async (req, res) => {
   try {
+    const { password, cpassword } = req.body;
+    if (password !== cpassword) {
+      return res
+        .status(500)
+        .json({ error: "Password and confirm password doesn't match" });
+    }
     await User.create({
       fullname: req.body.fullname,
       username: req.body.username,
