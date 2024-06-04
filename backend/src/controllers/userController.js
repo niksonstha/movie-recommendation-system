@@ -1,5 +1,6 @@
 import { User } from "../models/userSchema.js";
 import bcrypt from "bcryptjs";
+import { setUser } from "../services/userAuth.js";
 
 export const createUser = async (req, res) => {
   try {
@@ -42,10 +43,17 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    res.status(200).json({
-      success: true,
-      message: `Welcome ${user.email}`,
-    });
+    const token = setUser(user.toObject());
+
+    res
+      .status(200)
+      .cookie("uid", token, {
+        expires: new Date(Date.now() + 2592000000),
+      })
+      .json({
+        success: true,
+        message: `Welcome ${user.email}`,
+      });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -22,3 +22,20 @@ export const registerUser = async (
     console.log(error);
   }
 };
+export const loginUser = async (email, password) => {
+  try {
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_PATH}/user/loginUser`,
+      {
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
