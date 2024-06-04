@@ -1,6 +1,16 @@
-import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+// Navbar.js
+import {
+  Box,
+  ListItem,
+  Text,
+  UnorderedList,
+  useDisclosure,
+} from "@chakra-ui/react";
+import ProfileModal from "../modal/ProfileModal";
 
 const Navbar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Box
       display={"flex"}
@@ -67,10 +77,13 @@ const Navbar = () => {
           cursor={"pointer"}
           letterSpacing={1.5}
           transition={"all 0.2s ease-in"}
+          onClick={onOpen}
         >
           My Profile
         </Text>
       </Box>
+
+      <ProfileModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };
