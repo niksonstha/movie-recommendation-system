@@ -7,7 +7,6 @@ const ProtectedRoute = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const validateUser = () => {
     const cookie = Cookies.get("uid");
-    console.log(cookie);
 
     if (!cookie) {
       navigate("/login");

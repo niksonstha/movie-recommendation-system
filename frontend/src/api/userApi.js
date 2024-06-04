@@ -1,4 +1,5 @@
-import axios from "axios";
+import { instance } from "../axios/axios";
+
 export const registerUser = async (
   fullname,
   username,
@@ -7,25 +8,22 @@ export const registerUser = async (
   cpassword
 ) => {
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_PATH}/user/createUser`,
-      {
-        fullname,
-        username,
-        email,
-        password,
-        cpassword,
-      }
-    );
-    console.log(response);
+    const response = await instance.post("/user/createUser", {
+      fullname,
+      username,
+      email,
+      password,
+      cpassword,
+    });
+    return response;
   } catch (error) {
     console.log(error);
   }
 };
 export const loginUser = async (email, password) => {
   try {
-    const response = await axios.post(
-      `${import.meta.env.VITE_API_PATH}/user/loginUser`,
+    const response = await instance.post(
+      `/user/loginUser`,
       {
         email,
         password,

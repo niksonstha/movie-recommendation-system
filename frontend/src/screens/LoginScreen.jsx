@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Button,
@@ -6,6 +7,7 @@ import {
   Input,
   FormErrorMessage,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -37,15 +39,41 @@ const LoginScreen = () => {
   });
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const onLoginHandler = async (data) => {
-    const response = await loginUser(data.email, data.password);
-    console.log(response);
-    if (response.data.success == true) {
-      navigate("/");
+    try {
+      const response = await loginUser(data.email, data.password);
+      console.log(response);
+      if (response.data.success) {
+        toast({
+          title: "Login successful.",
+          description: `Welcome back, ${response.data.message}`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        navigate("/");
+      } else {
+        toast({
+          title: "Login failed.",
+          description: response.data.error || "Password incorrect",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Login failed.",
+        description: error.response?.data?.error || "Password incorrect",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const validateUser = () => {
     const cookie = Cookies.get("uid");
 
@@ -53,6 +81,7 @@ const LoginScreen = () => {
       navigate("/");
     }
   };
+
   useEffect(() => {
     validateUser();
   }, [validateUser]);

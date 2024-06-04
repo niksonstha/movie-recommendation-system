@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Button,
@@ -6,6 +7,7 @@ import {
   Input,
   FormErrorMessage,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -35,6 +37,7 @@ const schema = yup.object().shape({
 
 const RegisterScreen = () => {
   const navigate = useNavigate();
+  const toast = useToast();
   const {
     register,
     handleSubmit,
@@ -44,15 +47,36 @@ const RegisterScreen = () => {
   });
 
   const onRegisterHandler = async (data) => {
-    await registerUser(
-      data.fullname,
-      data.username,
-      data.email,
-      data.password,
-      data.cpassword
-    );
+    try {
+      const response = await registerUser(
+        data.fullname,
+        data.username,
+        data.email,
+        data.password,
+        data.cpassword
+      );
+      if (response.data.success == true) {
+        toast({
+          title: "User created successfully.",
+          description: "You can now log in with your new account.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+        navigate("/login");
+      }
+    } catch (error) {
+      toast({
+        title: "Registration failed.",
+        description:
+          error.response?.data?.error || "An error occurred. Please try again.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const validateUser = () => {
     const cookie = Cookies.get("uid");
 
@@ -60,6 +84,7 @@ const RegisterScreen = () => {
       navigate("/");
     }
   };
+
   useEffect(() => {
     validateUser();
   }, [validateUser]);
@@ -83,7 +108,7 @@ const RegisterScreen = () => {
             <FormErrorMessage>{errors.fullname?.message}</FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={errors.username}>
-            <FormLabel>UserName</FormLabel>
+            <FormLabel>Username</FormLabel>
             <Input type="text" {...register("username")} />
             <FormErrorMessage>{errors.username?.message}</FormErrorMessage>
           </FormControl>
