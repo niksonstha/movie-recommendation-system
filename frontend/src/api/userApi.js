@@ -37,3 +37,15 @@ export const loginUser = async (email, password) => {
     console.log(error);
   }
 };
+export const changePassword = async (id, oldPassword, newPassword) => {
+  console.log(id, oldPassword, newPassword);
+  try {
+    const response = await instance.patch(`/user/changePassword?id=${id}`, {
+      oldPassword,
+      newPassword,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

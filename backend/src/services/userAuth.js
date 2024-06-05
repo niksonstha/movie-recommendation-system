@@ -7,10 +7,3 @@ export const setUser = (user) => {
     expiresIn: "1h",
   });
 };
-export const getUser = (token) => {
-  try {
-    return jwt.verify(token, secretKey);
-  } catch (error) {
-    console.log(error);
-  }
-};

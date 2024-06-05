@@ -7,9 +7,17 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import ProfileModal from "../modal/ProfileModal";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const onLogoutHandler = () => {
+    Cookies.remove("uid");
+    navigate("/login");
+  };
 
   return (
     <Box
@@ -80,6 +88,16 @@ const Navbar = () => {
           onClick={onOpen}
         >
           My Profile
+        </Text>
+        <Text
+          mt={5}
+          _hover={{ color: "#FCCB06" }}
+          cursor={"pointer"}
+          letterSpacing={1.5}
+          transition={"all 0.2s ease-in"}
+          onClick={onLogoutHandler}
+        >
+          Logout
         </Text>
       </Box>
 
