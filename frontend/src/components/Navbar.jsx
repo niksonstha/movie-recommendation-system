@@ -1,4 +1,3 @@
-// Navbar.js
 import {
   Box,
   ListItem,
@@ -9,6 +8,14 @@ import {
 import ProfileModal from "../modal/ProfileModal";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { BsBrowserSafari } from "react-icons/bs";
+import { IoMdTrendingUp } from "react-icons/io";
+import {
+  MdOutlineLocalMovies,
+  MdOutlineUpcoming,
+  MdVerticalAlignTop,
+} from "react-icons/md";
+import "./Navbar.css"; // Import the CSS file
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,37 +52,21 @@ const Navbar = () => {
           flexDir={"column"}
           gap={6}
         >
-          <ListItem
-            _hover={{ color: "#FCCB06" }}
-            cursor={"pointer"}
-            letterSpacing={1.5}
-            transition={"all 0.2s ease-in"}
-          >
-            Home
+          <ListItem className="list">
+            <MdOutlineLocalMovies />
+            <Text>Now Playing</Text>
           </ListItem>
-          <ListItem
-            _hover={{ color: "#FCCB06" }}
-            cursor={"pointer"}
-            letterSpacing={1.5}
-            transition={"all 0.2s ease-in"}
-          >
-            Browse
+          <ListItem className="list">
+            <IoMdTrendingUp />
+            <Text>Trending</Text>
           </ListItem>
-          <ListItem
-            _hover={{ color: "#FCCB06" }}
-            cursor={"pointer"}
-            letterSpacing={1.5}
-            transition={"all 0.2s ease-in"}
-          >
-            Trending
+          <ListItem className="list">
+            <MdOutlineUpcoming />
+            <Text>Upcoming</Text>
           </ListItem>
-          <ListItem
-            _hover={{ color: "#FCCB06" }}
-            cursor={"pointer"}
-            letterSpacing={1.5}
-            transition={"all 0.2s ease-in"}
-          >
-            Playlist
+          <ListItem className="list">
+            <MdVerticalAlignTop />
+            <Text>Top Rated</Text>
           </ListItem>
         </UnorderedList>
       </Box>

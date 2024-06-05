@@ -44,7 +44,6 @@ const ProfileModal = ({ isOpen, onClose }) => {
   const onChangePasswordHanlder = async () => {
     try {
       const response = await changePassword(userid, oldPassword, newPassword);
-      // console.log(response["data"].status == "ok");
 
       if (response["data"].status == "ok") {
         toast({
@@ -116,9 +115,11 @@ const ProfileModal = ({ isOpen, onClose }) => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onChangePasswordHanlder}>
-            Save
-          </Button>
+          {openChangePasswordInput && (
+            <Button colorScheme="blue" mr={3} onClick={onChangePasswordHanlder}>
+              Save
+            </Button>
+          )}
           <Button onClick={onClose}>Cancel</Button>
         </ModalFooter>
       </ModalContent>

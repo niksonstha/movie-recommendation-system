@@ -1,0 +1,12 @@
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  transition: all 0.2s ease-in;
+}
+
+.list:hover {
+  color: #fccb06;
+}
