@@ -1,8 +1,10 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Input, Text } from "@chakra-ui/react";
 import { fetchMovies } from "../api/movieApi";
 import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import { CiSearch } from "react-icons/ci";
+import PopularMovies from "./PopularMovies";
 
 const MainSection = () => {
   const [movies, setMovies] = useState([]);
@@ -26,10 +28,41 @@ const MainSection = () => {
   return (
     <Box>
       <Box
+        width={"30%"}
+        pos={"relative"}
+        display={"flex"}
+        alignItems={"center"}
+        mb={4}
+        mt={6}
+        ml={4}
+      >
+        <Box pos={"absolute"} fontSize={"1.8rem"} ml={2}>
+          <CiSearch />
+        </Box>
+        <Input
+          type="text"
+          placeholder="Search everything"
+          paddingLeft={10}
+          variant="flushed"
+        />
+      </Box>
+
+      <Box
         height={"max-content"}
         backgroundColor={"#1C2321"}
         position={"relative"}
       >
+        <Box
+          pos={"absolute"}
+          top={0}
+          left={0}
+          width={"100%"}
+          height={"10%"}
+          background={
+            "linear-gradient(360deg, rgba(28,35,33,0) 20%, rgba(28,35,33,1) 90%)"
+          }
+          zIndex={1}
+        />
         <Carousel
           emulateTouch={true}
           autoPlay={true}
@@ -53,7 +86,7 @@ const MainSection = () => {
               />
               <Box
                 pos={"absolute"}
-                zIndex={1}
+                zIndex={2}
                 top={"30%"}
                 left={8}
                 textAlign={"left"}
@@ -91,6 +124,9 @@ const MainSection = () => {
           }
           zIndex={0}
         />
+      </Box>
+      <Box mt={4}>
+        <PopularMovies />
       </Box>
     </Box>
   );

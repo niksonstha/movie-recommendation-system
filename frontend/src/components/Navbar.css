@@ -5,8 +5,19 @@
   cursor: pointer;
   letter-spacing: 1.5px;
   transition: all 0.2s ease-in;
+  &:hover {
+    color: #fccb06;
+  }
 }
 
-.list:hover {
-  color: #fccb06;
+.profile__action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  transition: all 0.2s ease-in;
+  &:hover {
+    color: #fccb06;
+  }
 }
