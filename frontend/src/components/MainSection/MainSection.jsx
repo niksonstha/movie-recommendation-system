@@ -1,11 +1,13 @@
 import { Box, Image, Input, Text } from "@chakra-ui/react";
-import { fetchMovies } from "../api/movieApi";
 import { useEffect, useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import { CiSearch } from "react-icons/ci";
-import PopularMovies from "./Movies/PopularMovies";
-import TopRatedMovies from "./Movies/TopRatedMovies";
+import PopularMovies from "../Movies/PopularMovies";
+import TopRatedMovies from "../Movies/TopRatedMovies";
+import { fetchMovies } from "../../api/movieApi";
+import "./MainSection.css";
 
 const MainSection = () => {
   const [movies, setMovies] = useState([]);
@@ -25,6 +27,18 @@ const MainSection = () => {
   useEffect(() => {
     getMovies();
   }, []);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 9000,
+    pauseOnHover: true,
+    swipeToSlide: true,
+  };
 
   return (
     <Box>
@@ -64,15 +78,7 @@ const MainSection = () => {
           }
           zIndex={1}
         />
-        <Carousel
-          emulateTouch={true}
-          autoPlay={true}
-          interval={9000}
-          infiniteLoop={true}
-          showStatus={false}
-          showThumbs={false}
-          style={{ height: "100%" }}
-        >
+        <Slider {...settings}>
           {movies?.map((movie, index) => (
             <Box key={index} pos={"relative"} height={"80vh"}>
               <Image
@@ -113,17 +119,15 @@ const MainSection = () => {
               </Box>
             </Box>
           ))}
-        </Carousel>
+        </Slider>
         <Box
           pos={"absolute"}
-          top={0}
-          left={0}
+          bottom={0}
           width={"100%"}
-          height={"100%"}
+          height={"10%"}
           background={
             "linear-gradient(180deg, rgba(28,35,33,0) 20%, rgba(28,35,33,1) 90%)"
           }
-          zIndex={0}
         />
       </Box>
       <Box mt={4}>

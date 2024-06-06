@@ -4,7 +4,7 @@ import HomeScreen from "./screens/HomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import ProtectedRoute from "./private/ProtectedRoute";
-import MainSection from "./components/MainSection";
+import MainSection from "./components/MainSection/MainSection";
 import Trending from "./components/Movies/Trending";
 import UpcomingMovies from "./components/Movies/UpcomingMovies";
 
