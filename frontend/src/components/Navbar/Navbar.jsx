@@ -17,11 +17,7 @@ import Cookies from "js-cookie";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoMdTrendingUp, IoIosLogOut } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
-import {
-  MdOutlineLocalMovies,
-  MdOutlineUpcoming,
-  MdVerticalAlignTop,
-} from "react-icons/md";
+import { MdOutlineLocalMovies, MdOutlineUpcoming } from "react-icons/md";
 import { useRef } from "react";
 import "./Navbar.css"; // Import the CSS file
 

@@ -8,7 +8,11 @@ const UpcomingMovies = () => {
 
   const getUpcomingMovies = async () => {
     const response = await upcomingMovies();
-    setUpcoming(response);
+    // Filter movies based on release date
+    const filteredMovies = response.filter(
+      (movie) => new Date(movie.release_date) > new Date()
+    );
+    setUpcoming(filteredMovies);
   };
 
   useEffect(() => {
@@ -18,7 +22,7 @@ const UpcomingMovies = () => {
   return (
     <Box ml={5} mt={3}>
       <Heading letterSpacing={4} mb={5}>
-        Popular Movies
+        Upcoming Movies
       </Heading>
       <Grid
         templateColumns="repeat(auto-fill, minmax(250px, 1fr))"
@@ -27,7 +31,7 @@ const UpcomingMovies = () => {
       >
         {upcoming.map((movie, index) => (
           <Box key={index}>
-            <MovieCard key={index} movie={movie} />
+            <MovieCard movie={movie} />
           </Box>
         ))}
       </Grid>

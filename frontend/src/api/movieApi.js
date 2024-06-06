@@ -19,11 +19,11 @@ export const fetchMovies = async () => {
   }
 };
 
-export const fetchTrendingMovies = async () => {
+export const fetchTrendingMovies = async (page) => {
   const options = {
     method: "GET",
     url: `${import.meta.env.VITE_TRENDING_MOVIES}`,
-    params: { language: "en-US", page: "1" },
+    params: { language: "en-US", page },
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${import.meta.env.VITE_MOVIE_API_KEY}`,
