@@ -80,11 +80,7 @@ const Navbar = () => {
           </ListItem>
           <ListItem className="list">
             <MdOutlineUpcoming />
-            <NavLink>Upcoming</NavLink>
-          </ListItem>
-          <ListItem className="list">
-            <MdVerticalAlignTop />
-            <NavLink>Top Rated</NavLink>
+            <NavLink to={"/upcoming"}>Upcoming</NavLink>
           </ListItem>
         </UnorderedList>
       </Box>

@@ -7,11 +7,11 @@ import { topRated } from "../../api/movieApi";
 import MovieCard from "../MovieCard/MovieCard";
 
 const PopularMovies = () => {
-  const [popular, setPopular] = useState([]);
+  const [topRateMovies, setTopRateMovies] = useState([]);
 
   const getPopularMovies = async () => {
     const response = await topRated();
-    setPopular(response);
+    setTopRateMovies(response);
   };
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const PopularMovies = () => {
         Top Rated Movies
       </Heading>
       <Slider {...settings}>
-        {popular.map((movie, index) => (
+        {topRateMovies.map((movie, index) => (
           <Box key={index}>
             <MovieCard key={index} movie={movie} />
           </Box>

@@ -6,6 +6,7 @@ import LoginScreen from "./screens/LoginScreen";
 import ProtectedRoute from "./private/ProtectedRoute";
 import MainSection from "./components/MainSection";
 import Trending from "./components/Movies/Trending";
+import UpcomingMovies from "./components/Movies/UpcomingMovies";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<HomeScreen />}>
             <Route path="" element={<MainSection />} />
             <Route path="/trending" element={<Trending />} />
+            <Route path="/upcoming" element={<UpcomingMovies />} />
           </Route>
         </Route>
       </Routes>
