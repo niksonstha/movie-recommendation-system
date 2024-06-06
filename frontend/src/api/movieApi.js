@@ -74,3 +74,21 @@ export const popularMovies = async () => {
     console.log(error);
   }
 };
+export const topRated = async () => {
+  const options = {
+    method: "GET",
+    url: `${import.meta.env.VITE_TOP_RATED}`,
+    params: { language: "en-US", page: "1" },
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.VITE_MOVIE_API_KEY}`,
+    },
+  };
+
+  try {
+    const response = await axios.request(options);
+    return response.data.results;
+  } catch (error) {
+    console.log(error);
+  }
+};

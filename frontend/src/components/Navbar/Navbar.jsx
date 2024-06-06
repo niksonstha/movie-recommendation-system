@@ -12,7 +12,7 @@ import {
   AlertDialogOverlay,
   Button,
 } from "@chakra-ui/react";
-import ProfileModal from "../modal/ProfileModal";
+import ProfileModal from "../../modal/ProfileModal";
 import Cookies from "js-cookie";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoMdTrendingUp, IoIosLogOut } from "react-icons/io";

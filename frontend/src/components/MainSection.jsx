@@ -1,10 +1,11 @@
-import { Box, Heading, Image, Input, Text } from "@chakra-ui/react";
+import { Box, Image, Input, Text } from "@chakra-ui/react";
 import { fetchMovies } from "../api/movieApi";
 import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { CiSearch } from "react-icons/ci";
-import PopularMovies from "./PopularMovies";
+import PopularMovies from "./Movies/PopularMovies";
+import TopRatedMovies from "./Movies/TopRatedMovies";
 
 const MainSection = () => {
   const [movies, setMovies] = useState([]);
@@ -127,6 +128,7 @@ const MainSection = () => {
       </Box>
       <Box mt={4}>
         <PopularMovies />
+        <TopRatedMovies />
       </Box>
     </Box>
   );
