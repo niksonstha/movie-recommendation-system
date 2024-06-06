@@ -133,11 +133,20 @@ export const searchMovies = async (query) => {
     console.log(error);
   }
 };
-export const movieDetail = async (id) => {
+export const movieDetail = async (id, recommendation) => {
+  let url, params;
+  if (recommendation) {
+    url = `${import.meta.env.VITE_MOVIE_DETAIL}${id}/recommendations`;
+    params = { language: "en-US", page: "1" };
+  } else {
+    url = `${import.meta.env.VITE_MOVIE_DETAIL}${id}`;
+    params = { language: "en-US" };
+  }
+
   const options = {
     method: "GET",
-    url: `${import.meta.env.VITE_MOVIE_DETAIL}${id}`,
-    params: { language: "en-US" },
+    url,
+    params,
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${import.meta.env.VITE_MOVIE_API_KEY}`,
@@ -146,7 +155,7 @@ export const movieDetail = async (id) => {
 
   try {
     const response = await axios.request(options);
-    return response.data;
+    return recommendation ? response.data.results : response.data;
   } catch (error) {
     console.log(error);
   }

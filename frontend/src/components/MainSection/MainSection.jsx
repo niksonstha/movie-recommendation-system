@@ -46,6 +46,8 @@ const MainSection = () => {
     getMovies();
   }, []);
 
+  console.log(searchResults);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -91,7 +93,7 @@ const MainSection = () => {
             mt={2}
             zIndex={2}
             boxShadow={"md"}
-            maxHeight={"200px"}
+            maxHeight={"70vh"}
             overflowY={"auto"}
           >
             <List spacing={1}>
@@ -103,7 +105,14 @@ const MainSection = () => {
                     color="white"
                     _hover={{ bg: "gray.600", cursor: "pointer" }}
                   >
-                    {movie.title}
+                    <Box>
+                      <Text fontSize="lg" fontWeight="bold" mb={1}>
+                        {movie.title}
+                      </Text>
+                      <Text fontSize="sm" color="gray.400">
+                        Release Date: {movie.release_date}
+                      </Text>
+                    </Box>
                   </ListItem>
                 </Link>
               ))}

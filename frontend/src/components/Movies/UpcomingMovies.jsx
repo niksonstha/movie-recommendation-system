@@ -31,7 +31,7 @@ const UpcomingMovies = () => {
       >
         {upcoming.map((movie, index) => (
           <Box key={index}>
-            <MovieCard movie={movie} />
+            <MovieCard movie={movie} isSliding={true} />
           </Box>
         ))}
       </Grid>

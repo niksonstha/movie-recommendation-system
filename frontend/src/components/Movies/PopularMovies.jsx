@@ -8,6 +8,7 @@ import MovieCard from "../MovieCard/MovieCard";
 
 const PopularMovies = () => {
   const [popular, setPopular] = useState([]);
+  const [isSliding, setIsSliding] = useState(true);
 
   const getPopularMovies = async () => {
     const response = await popularMovies();
@@ -48,6 +49,8 @@ const PopularMovies = () => {
         },
       },
     ],
+    beforeChange: () => setIsSliding(false),
+    afterChange: () => setIsSliding(true),
   };
 
   return (
@@ -58,7 +61,7 @@ const PopularMovies = () => {
       <Slider {...settings}>
         {popular.map((movie, index) => (
           <Box key={index}>
-            <MovieCard key={index} movie={movie} />
+            <MovieCard key={index} movie={movie} isSliding={isSliding} />
           </Box>
         ))}
       </Slider>

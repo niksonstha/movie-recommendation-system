@@ -41,7 +41,7 @@ const Trending = () => {
         justifyContent="space-around"
       >
         {trendingMovies.map((movie, index) => (
-          <MovieCard key={index} movie={movie} />
+          <MovieCard key={index} movie={movie} isSliding={true} />
         ))}
       </Grid>
       <Box mt={4} textAlign="center">

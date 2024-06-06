@@ -3,7 +3,7 @@ import { Box, Image, Heading, Text, Stack, Badge } from "@chakra-ui/react";
 import { fetchGenres } from "../../api/movieApi";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@chakra-ui/react"; // Import the Skeleton component
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // Language code to full name mapping
 const languageMap = {
@@ -18,7 +18,8 @@ const languageMap = {
   // Add more language mappings as needed
 };
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, isSliding }) => {
+  console.log(isSliding);
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true); // State to manage loading
 
@@ -101,7 +102,7 @@ const MovieCard = ({ movie }) => {
       height={"80vh"}
       cursor={"pointer"}
     >
-      <Link to={"/movieDetail?movieId=" + movie.id}>
+      <Link to={isSliding ? "/movieDetail?movieId=" + movie.id : ""}>
         <Image
           src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
           alt={title}
