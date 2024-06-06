@@ -3,6 +3,7 @@ import { Box, Image, Heading, Text, Stack, Badge } from "@chakra-ui/react";
 import { fetchGenres } from "../../api/movieApi";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@chakra-ui/react"; // Import the Skeleton component
+import { Link } from "react-router-dom";
 
 // Language code to full name mapping
 const languageMap = {
@@ -100,28 +101,30 @@ const MovieCard = ({ movie }) => {
       height={"80vh"}
       cursor={"pointer"}
     >
-      <Image
-        src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-        alt={title}
-        height={"300px"}
-        width={"100%"}
-        objectFit="cover"
-      />
-      <Box p={5}>
-        <Stack spacing={3}>
-          <Heading fontSize="xl">{title}</Heading>
-          <Text fontSize="sm" color="gray.500">
-            {getGenreNames(genre_ids)}
-          </Text>
-          {vote_average > 0 && (
-            <Text>
-              Rating: <Badge colorScheme="green">{vote_average}</Badge>
+      <Link to={"/movieDetail?movieId=" + movie.id}>
+        <Image
+          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          alt={title}
+          height={"300px"}
+          width={"100%"}
+          objectFit="cover"
+        />
+        <Box p={5}>
+          <Stack spacing={3}>
+            <Heading fontSize="xl">{title}</Heading>
+            <Text fontSize="sm" color="gray.500">
+              {getGenreNames(genre_ids)}
             </Text>
-          )}
-          <Text>Release Date: {release_date}</Text>
-          <Text>Language: {getLanguageName(original_language)}</Text>
-        </Stack>
-      </Box>
+            {vote_average > 0 && (
+              <Text>
+                Rating: <Badge colorScheme="green">{vote_average}</Badge>
+              </Text>
+            )}
+            <Text>Release Date: {release_date}</Text>
+            <Text>Language: {getLanguageName(original_language)}</Text>
+          </Stack>
+        </Box>
+      </Link>
     </Box>
   );
 };

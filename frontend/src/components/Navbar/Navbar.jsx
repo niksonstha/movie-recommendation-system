@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import ProfileModal from "../../modal/ProfileModal";
 import Cookies from "js-cookie";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoMdTrendingUp, IoIosLogOut } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { MdOutlineLocalMovies, MdOutlineUpcoming } from "react-icons/md";
@@ -48,16 +48,18 @@ const Navbar = () => {
       height={"100%"}
     >
       <Box>
-        <Text
-          fontSize={"1.5rem"}
-          fontWeight={"bold"}
-          letterSpacing={4}
-          textAlign={"center"}
-          mt={5}
-          color={"#7D98A1"}
-        >
-          CineWave
-        </Text>
+        <Link to={"/"}>
+          <Text
+            fontSize={"1.5rem"}
+            fontWeight={"bold"}
+            letterSpacing={4}
+            textAlign={"center"}
+            mt={5}
+            color={"#7D98A1"}
+          >
+            CineWave
+          </Text>
+        </Link>
         <UnorderedList
           mt={8}
           ml={9}

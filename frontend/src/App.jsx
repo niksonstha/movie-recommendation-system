@@ -7,6 +7,7 @@ import ProtectedRoute from "./private/ProtectedRoute";
 import MainSection from "./components/MainSection/MainSection";
 import Trending from "./components/Movies/Trending";
 import UpcomingMovies from "./components/Movies/UpcomingMovies";
+import MovieDetails from "./components/Movies/MovieDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="" element={<MainSection />} />
             <Route path="/trending" element={<Trending />} />
             <Route path="/upcoming" element={<UpcomingMovies />} />
+            <Route path="/movieDetail" element={<MovieDetails />} />
           </Route>
         </Route>
       </Routes>
