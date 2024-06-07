@@ -80,6 +80,7 @@ const MovieDetails = () => {
       movie.id,
       userId,
       movie.title,
+      movie.poster_path,
       movie.genres.map((genre) => genre.name)
     );
 
@@ -134,7 +135,9 @@ const MovieDetails = () => {
       >
         <Box position="relative" marginBottom={4}>
           <Image
-            src={`${import.meta.env.VITE_IMAGE_PATH}/${movie.backdrop_path}`}
+            src={`${import.meta.env.VITE_IMAGE_PATH}/original/${
+              movie.backdrop_path
+            }`}
             alt={movie.title}
             width="100%"
             height="80vh"
@@ -158,7 +161,7 @@ const MovieDetails = () => {
           marginLeft={10}
         >
           <Image
-            src={`${import.meta.env.VITE_IMAGE_PATH}/${movie.poster_path}`}
+            src={`${import.meta.env.VITE_IMAGE_PATH}/w500/${movie.poster_path}`}
             alt={movie.title}
             marginBottom={4}
             borderRadius="md"
@@ -233,7 +236,7 @@ const MovieDetails = () => {
                 >
                   <Box width={"25%"}>
                     <Image
-                      src={`${import.meta.env.VITE_IMAGE_PATH}/${
+                      src={`${import.meta.env.VITE_IMAGE_PATH}/w200/${
                         recommendation.poster_path
                       }`}
                       alt={recommendation.title}

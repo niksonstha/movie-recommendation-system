@@ -15,6 +15,10 @@ const MovieWatchlistSchema = new mongoose.Schema(
       type: String,
       required: [true, "Title is required"],
     },
+    poster_path: {
+      type: String,
+      required: [true, "Title is required"],
+    },
     genres: [
       {
         type: String,

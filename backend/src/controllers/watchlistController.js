@@ -2,7 +2,7 @@ import { MovieWatchlist } from "../models/movieWatchlistSchema.js";
 
 export const watchlist = async (req, res) => {
   try {
-    const { id, userId, title, genres } = req.body;
+    const { id, userId, title, poster_path, genres } = req.body;
 
     // Check if the movie already exists in the watchlist for the same user
     const existingMovie = await MovieWatchlist.findOne({ id, userId });
@@ -20,6 +20,7 @@ export const watchlist = async (req, res) => {
       id,
       userId,
       title,
+      poster_path,
       genres,
     });
     console.log(result);

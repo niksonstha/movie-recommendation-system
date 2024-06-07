@@ -141,7 +141,7 @@ const MainSection = () => {
           {movies?.map((movie, index) => (
             <Box key={index} pos={"relative"} height={"80vh"}>
               <Image
-                src={`${import.meta.env.VITE_IMAGE_PATH}/${
+                src={`${import.meta.env.VITE_IMAGE_PATH}/original/${
                   movie.backdrop_path
                 }`}
                 alt="banner"

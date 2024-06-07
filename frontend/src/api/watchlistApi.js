@@ -1,11 +1,12 @@
 import { instance } from "../axios/axios";
 
-export const addWatchlist = async (id, userId, title, genres) => {
+export const addWatchlist = async (id, userId, title, poster_path, genres) => {
   try {
     const response = await instance.post("/watchlist", {
       id,
       userId,
       title,
+      poster_path,
       genres,
     });
     return response;
