@@ -8,7 +8,7 @@ import MovieCard from "../MovieCard/MovieCard";
 
 const PopularMovies = () => {
   const [topRateMovies, setTopRateMovies] = useState([]);
-  const [isSliding, setIsSliding] = useState(false);
+  const [isSliding, setIsSliding] = useState(true);
 
   const getPopularMovies = async () => {
     const response = await topRated();
@@ -49,8 +49,8 @@ const PopularMovies = () => {
         },
       },
     ],
-    beforeChange: () => setIsSliding(true),
-    afterChange: () => setIsSliding(false),
+    beforeChange: () => setIsSliding(false),
+    afterChange: () => setIsSliding(true),
   };
 
   return (

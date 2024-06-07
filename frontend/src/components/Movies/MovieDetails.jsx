@@ -1,7 +1,20 @@
-import { Box, Image, Text, Spinner, Center, Badge } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  Spinner,
+  Center,
+  Badge,
+  Button,
+  useToast,
+} from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchGenres, movieDetail } from "../../api/movieApi";
+import { FaPlus } from "react-icons/fa6";
+import { addWatchlist } from "../../api/watchlistApi";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -13,10 +26,19 @@ const MovieDetails = () => {
   const [loading, setLoading] = useState(true);
   const [genres, setGenres] = useState([]);
 
+  const toast = useToast();
+  const token = Cookies.get("uid");
+  let userId = "";
+
+  if (token) {
+    const decodedToken = jwtDecode(token);
+    userId = decodedToken._id;
+  }
+
   const getGenres = async () => {
     const genresResponse = await fetchGenres();
     setGenres(genresResponse);
-    setLoading(false); // Set loading to false after fetching data
+    setLoading(false);
   };
 
   const getGenreNames = (genreIds) => {
@@ -32,7 +54,9 @@ const MovieDetails = () => {
     try {
       const response = await movieDetail(movieId);
       setMovie(response); // Ensure you set the state with response.data
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
     } catch (error) {
       console.error("Failed to fetch movie details", error);
       setLoading(false);
@@ -43,9 +67,38 @@ const MovieDetails = () => {
     try {
       const response = await movieDetail(movieId, true);
       setRecommendations(response);
-      console.log(response);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
     } catch (error) {
       console.error("Failed to fetch recommendations", error);
+    }
+  };
+
+  const handleWatchlist = async () => {
+    const response = await addWatchlist(
+      movie.id,
+      userId,
+      movie.title,
+      movie.genres.map((genre) => genre.name)
+    );
+
+    try {
+      if (response.data.success) {
+        toast({
+          title: response.data.message,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: response.response.data.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -64,7 +117,11 @@ const MovieDetails = () => {
   }
 
   if (!movie) {
-    return <Text>Movie not found</Text>;
+    return (
+      <Center height="100vh">
+        <Spinner size="xl" />
+      </Center>
+    );
   }
 
   return (
@@ -125,44 +182,66 @@ const MovieDetails = () => {
             <Text fontSize="md" marginTop={2} color="gray.500">
               Genres: {movie.genres.map((genre) => genre.name).join(", ")}
             </Text>
-            <Text fontSize="md" marginTop={2} color="gray.500">
-              Tagline: {movie.tagline}
-            </Text>
+            {movie.tagline && (
+              <Text fontSize="md" marginTop={2} color="gray.500">
+                Tagline: {movie.tagline}
+              </Text>
+            )}
             <Badge fontSize="md" marginTop={2} colorScheme="green">
               Vote Average: {movie.vote_average}
             </Badge>
             <Text fontSize="md" marginTop={2} color="gray.500">
               Vote Count: {movie.vote_count}
             </Text>
+            <Button
+              marginTop={4}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              gap={2}
+              rounded={20}
+              onClick={handleWatchlist}
+            >
+              <Box fontSize={"1.2rem"}>
+                <FaPlus />
+              </Box>
+              <Text>Add to Watchlist</Text>
+            </Button>
           </Box>
         </Box>
       </Box>
       <Box mt={70}>
-        <Text fontSize="3xl" fontWeight="bold" marginBottom={3}>
-          Recommendations
-        </Text>
         {recommendations.length > 0 && (
           <Box padding={5}>
-            <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={2}>
+            <Text fontSize="3xl" fontWeight="bold" marginBottom={3}>
+              Recommendations
+            </Text>
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(3, 1fr)"
+              gap={2}
+              height={"max-content"}
+            >
               {recommendations.slice(0, 8).map((recommendation) => (
                 <Box
                   key={recommendation.id}
-                  marginRight={4}
                   display={"flex"}
-                  gap={2}
                   bgColor={"#EEEEEE"}
                   color={"black"}
                   rounded={6}
+                  height={"120px"}
                 >
-                  <Image
-                    src={`${import.meta.env.VITE_IMAGE_PATH}/${
-                      recommendation.poster_path
-                    }`}
-                    alt={recommendation.title}
-                    width={"20%"}
-                    height={"100%"}
-                  />
-                  <Box>
+                  <Box width={"25%"}>
+                    <Image
+                      src={`${import.meta.env.VITE_IMAGE_PATH}/${
+                        recommendation.poster_path
+                      }`}
+                      alt={recommendation.title}
+                      height={"100%"}
+                      roundedLeft={6}
+                    />
+                  </Box>
+                  <Box width={"75%"}>
                     <Badge marginTop={2} colorScheme="green">
                       {recommendation.vote_average}
                     </Badge>

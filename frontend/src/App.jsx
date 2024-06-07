@@ -8,6 +8,7 @@ import MainSection from "./components/MainSection/MainSection";
 import Trending from "./components/Movies/Trending";
 import UpcomingMovies from "./components/Movies/UpcomingMovies";
 import MovieDetails from "./components/Movies/MovieDetails";
+import Watchlist from "./components/Movies/Watchlist";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/trending" element={<Trending />} />
             <Route path="/upcoming" element={<UpcomingMovies />} />
             <Route path="/movieDetail" element={<MovieDetails />} />
+            <Route path="/watchList" element={<Watchlist />} />
           </Route>
         </Route>
       </Routes>

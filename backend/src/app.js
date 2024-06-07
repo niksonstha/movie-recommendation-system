@@ -5,6 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
+import watchlistMoviesRoutes from "./routes/watchlistMoviesRoutes.js";
 import collaborativeRoutes from "./routes/collaborativeRoutes.js";
 import contentRoutes from "./routes/contentRoutes.js";
 
@@ -30,8 +31,9 @@ app.use(cookieParser());
 
 // ? routes
 app.use("/api/v1/user", userRoutes);
-app.use("/api/v1/collaborative", collaborativeRoutes);
-app.use("/api/v1/content", contentRoutes);
+app.use("/api/v1/watchList", watchlistMoviesRoutes);
+// app.use("/api/v1/collaborative", collaborativeRoutes);
+// app.use("/api/v1/content", contentRoutes);
 
 // ? server start
 app.listen(process.env.PORT, () => {

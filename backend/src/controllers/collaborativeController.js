@@ -1,5 +1,5 @@
 import { Rating } from "../models/ratingSchema.js";
-import { Movie } from "../models/movieSchema.js";
+import { MovieWatchlist } from "../models/movieWatchlistSchema.js";
 
 export const collaborativeRecommend = async (req, res) => {
   const userId = parseInt(req.query.user_id);

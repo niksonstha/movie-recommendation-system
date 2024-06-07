@@ -1,4 +1,4 @@
-import { Movie } from "../models/movieSchema.js";
+import { MovieWatchlist } from "../models/movieWatchlistSchema.js";
 import natural from "natural";
 const TfIdf = natural.TfIdf;
 

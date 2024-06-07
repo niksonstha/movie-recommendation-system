@@ -18,6 +18,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { IoMdTrendingUp, IoIosLogOut } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { MdOutlineLocalMovies, MdOutlineUpcoming } from "react-icons/md";
+import { LiaSwatchbookSolid } from "react-icons/lia";
 import { useRef } from "react";
 import "./Navbar.css"; // Import the CSS file
 
@@ -79,6 +80,10 @@ const Navbar = () => {
           <ListItem className="list">
             <MdOutlineUpcoming />
             <NavLink to={"/upcoming"}>Upcoming</NavLink>
+          </ListItem>
+          <ListItem className="list">
+            <LiaSwatchbookSolid />
+            <NavLink to={"/watchlist"}>Watchlist</NavLink>
           </ListItem>
         </UnorderedList>
       </Box>
