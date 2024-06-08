@@ -8,7 +8,7 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchGenres, movieDetail } from "../../api/movieApi";
 import { FaPlus } from "react-icons/fa6";
@@ -80,6 +80,8 @@ const MovieDetails = () => {
       movie.id,
       userId,
       movie.title,
+      movie.release_date,
+      movie.runtime,
       movie.poster_path,
       movie.genres.map((genre) => genre.name)
     );
@@ -104,10 +106,12 @@ const MovieDetails = () => {
   };
 
   useEffect(() => {
-    getMovieDetails();
-    getRecommendation();
-    getGenres();
-  }, []);
+    if (queryParams) {
+      getMovieDetails();
+      getRecommendation();
+      getGenres();
+    }
+  }, [queryParams]);
 
   if (loading) {
     return (
@@ -214,7 +218,7 @@ const MovieDetails = () => {
         </Box>
       </Box>
       <Box mt={70}>
-        {recommendations.length > 0 && (
+        {recommendations?.length > 0 && (
           <Box padding={5}>
             <Text fontSize="3xl" fontWeight="bold" marginBottom={3}>
               Recommendations
@@ -234,7 +238,10 @@ const MovieDetails = () => {
                   rounded={6}
                   height={"120px"}
                 >
-                  <Box width={"25%"}>
+                  <Link
+                    to={`/movieDetail?movieId=${recommendation.id}`}
+                    width={"25%"}
+                  >
                     <Image
                       src={`${import.meta.env.VITE_IMAGE_PATH}/w200/${
                         recommendation.poster_path
@@ -243,7 +250,7 @@ const MovieDetails = () => {
                       height={"100%"}
                       roundedLeft={6}
                     />
-                  </Box>
+                  </Link>
                   <Box width={"75%"}>
                     <Badge marginTop={2} colorScheme="green">
                       {recommendation.vote_average}
