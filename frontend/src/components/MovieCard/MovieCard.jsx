@@ -19,7 +19,6 @@ const languageMap = {
 };
 
 const MovieCard = ({ movie, isSliding }) => {
-  console.log(isSliding);
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true); // State to manage loading
 
@@ -99,14 +98,14 @@ const MovieCard = ({ movie, isSliding }) => {
       transition="transform 0.2s"
       _hover={{ transform: "scale(1.05)" }}
       m={2}
-      height={"80vh"}
+      height={["50vh", "80vh"]}
       cursor={"pointer"}
     >
       <Link to={isSliding ? "/movieDetail?movieId=" + movie.id : ""}>
         <Image
           src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
           alt={title}
-          height={"300px"}
+          height={["150px", "300px"]}
           width={"100%"}
           objectFit="cover"
         />

@@ -32,7 +32,7 @@ const Trending = () => {
 
   return (
     <Box ml={5} mt={3} mb={10}>
-      <Heading letterSpacing={4} mb={5}>
+      <Heading letterSpacing={4} mb={5} textAlign={"center"}>
         Trending Movies
       </Heading>
       <Grid
@@ -44,29 +44,31 @@ const Trending = () => {
           <MovieCard key={index} movie={movie} isSliding={true} />
         ))}
       </Grid>
-      <Box mt={4} textAlign="center">
-        <Text fontSize="lg" mb={2}>
-          Page {page} of {totalPages}
-        </Text>
-        <Button
-          variant="outline"
-          colorScheme="blue"
-          onClick={handlePrevPage}
-          mr={2}
-          disabled={page === 1}
-        >
-          Previous Page
-        </Button>
-        <Button
-          variant="outline"
-          colorScheme="blue"
-          onClick={handleNextPage}
-          ml={2}
-          disabled={page === totalPages}
-        >
-          Next Page
-        </Button>
-      </Box>
+      {trendingMovies && (
+        <Box mt={4} textAlign="center">
+          <Text fontSize="lg" mb={2}>
+            Page {page} of {totalPages}
+          </Text>
+          <Button
+            variant="outline"
+            colorScheme="blue"
+            onClick={handlePrevPage}
+            mr={2}
+            disabled={page === 1}
+          >
+            Previous Page
+          </Button>
+          <Button
+            variant="outline"
+            colorScheme="blue"
+            onClick={handleNextPage}
+            ml={2}
+            disabled={page === totalPages}
+          >
+            Next Page
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };

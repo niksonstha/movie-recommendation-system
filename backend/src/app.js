@@ -6,8 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import watchlistMoviesRoutes from "./routes/watchlistMoviesRoutes.js";
-import collaborativeRoutes from "./routes/collaborativeRoutes.js";
-import contentRoutes from "./routes/contentRoutes.js";
+import hybridRoutes from "./routes/hybridRoutes.js";
 
 const app = express();
 
@@ -32,8 +31,7 @@ app.use(cookieParser());
 // ? routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/watchList", watchlistMoviesRoutes);
-// app.use("/api/v1/collaborative", collaborativeRoutes);
-// app.use("/api/v1/content", contentRoutes);
+app.use("/api/v1/recommendation", hybridRoutes);
 
 // ? server start
 app.listen(process.env.PORT, () => {

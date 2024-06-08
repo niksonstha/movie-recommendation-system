@@ -20,7 +20,6 @@ const Watchlist = () => {
 
   const getWatchlist = async () => {
     const response = await fetchWatchlist(userid);
-    console.log(response);
     setWatchlist(response.data["watchlist"]);
     setIsLoaded(true); // Set loading status to true after fetching data
   };
@@ -41,11 +40,16 @@ const Watchlist = () => {
 
   return (
     <Box mt={5}>
-      <Heading fontFamily={"Poppins"} letterSpacing={4} mb={4}>
+      <Heading
+        fontFamily={"Poppins"}
+        letterSpacing={4}
+        mb={4}
+        textAlign={"center"}
+      >
         Your Watchlist
       </Heading>
       {watchlist.length > 0 ? (
-        <VStack align="stretch" spacing={4}>
+        <VStack align="stretch" spacing={4} ml={5} mb={5}>
           <AnimatePresence>
             {watchlist.map((item) => (
               <motion.div
@@ -79,21 +83,52 @@ const Watchlist = () => {
                   >
                     <RxCross2 color="#EEEEEE" />
                   </Box>
+
                   <Image
                     src={`${import.meta.env.VITE_IMAGE_PATH}/w200/${
                       item.poster_path
                     }`}
                     alt={item.title}
-                    width={"10%"}
+                    // width={["20%", "20%", "10%"]}
                     height="100%"
                     objectFit="cover"
-                    borderLeftRadius={'md'}
+                    borderLeftRadius={"md"}
                   />
-                  <VStack align="flex-start" spacing={2} ml={4}>
-                    <Box display={"flex"} gap={2} mt={2}>
-                      <Text mb={2}>{item.runtime + " minutes / "}</Text>
-                      <Text mb={2}>{item.release_date + " / "}</Text>
-                      <Text>{item.genres.join(", ")}</Text>
+
+                  <VStack align="flex-start" spacing={2} ml={2} mr={6}>
+                    <Box
+                      display={"flex"}
+                      gap={2}
+                      mt={2}
+                      fontSize={["0.5rem", "1rem"]}
+                      color={"white"}
+                    >
+                      <Text
+                        mb={2}
+                        bgColor={"red"}
+                        padding={1}
+                        rounded={4}
+                        height={"max-content"}
+                      >
+                        {item.runtime + " minutes"}
+                      </Text>
+                      <Text
+                        mb={2}
+                        bgColor={"red"}
+                        padding={1}
+                        rounded={4}
+                        height={"max-content"}
+                      >
+                        {item.release_date}
+                      </Text>
+                      <Text
+                        bgColor={"red"}
+                        padding={1}
+                        rounded={4}
+                        height={"max-content"}
+                      >
+                        {item.genres.join(", ")}
+                      </Text>
                     </Box>
 
                     <Text

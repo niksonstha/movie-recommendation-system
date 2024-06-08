@@ -52,7 +52,7 @@ export const loginUser = async (req, res) => {
       })
       .json({
         success: true,
-        message: `Welcome ${user.email}`,
+        message: `Welcome ${user.fullname}`,
       });
   } catch (err) {
     res.status(500).json({ error: err.message });

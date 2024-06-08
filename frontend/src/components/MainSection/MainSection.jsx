@@ -10,6 +10,7 @@ import { fetchMovies, searchMovies } from "../../api/movieApi";
 import "./MainSection.css";
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
+import HybridRecommendation from "../Movies/HybridRecommendation";
 
 const MainSection = () => {
   const [movies, setMovies] = useState([]);
@@ -46,8 +47,6 @@ const MainSection = () => {
     getMovies();
   }, []);
 
-  console.log(searchResults);
-
   const settings = {
     dots: true,
     infinite: true,
@@ -63,21 +62,23 @@ const MainSection = () => {
   return (
     <Box mb={10}>
       <Box
-        width={"30%"}
+        width={["50%", "30%"]}
         pos={"relative"}
         display={"flex"}
         alignItems={"center"}
         mb={4}
         mt={6}
-        ml={4}
+        ml={10}
       >
-        <Box pos={"absolute"} fontSize={"1.8rem"} ml={2}>
+        <Box pos={"absolute"} fontSize={["1rem", "1.2rem", "1.8rem"]}>
           <CiSearch />
         </Box>
+
         <Input
           type="text"
           placeholder="Search everything"
-          paddingLeft={10}
+          paddingLeft={[5, 10]}
+          fontSize={["0.8rem", "1.2rem"]}
           variant="flushed"
           value={movieSearch}
           onChange={handleChange}
@@ -106,7 +107,11 @@ const MainSection = () => {
                     _hover={{ bg: "gray.600", cursor: "pointer" }}
                   >
                     <Box>
-                      <Text fontSize="lg" fontWeight="bold" mb={1}>
+                      <Text
+                        fontSize={["sm", "md", "lg"]}
+                        fontWeight="bold"
+                        mb={1}
+                      >
                         {movie.title}
                       </Text>
                       <Text fontSize="sm" color="gray.400">
@@ -156,12 +161,12 @@ const MainSection = () => {
                 top={"30%"}
                 left={8}
                 textAlign={"left"}
-                width={"50%"}
+                width={["80%", "50%"]}
               >
-                <Text fontSize={"4xl"} fontWeight={"bold"}>
+                <Text fontSize={["2xl", "4xl"]} fontWeight={"bold"}>
                   {movie.title}
                 </Text>
-                <Text fontSize={"md"} textAlign={"justify"}>
+                <Text fontSize={["sm", "md"]} textAlign={"justify"}>
                   {movie.overview}
                 </Text>
                 <Text
@@ -192,6 +197,7 @@ const MainSection = () => {
       <Box mt={4}>
         <PopularMovies />
         <TopRatedMovies />
+        <HybridRecommendation />
       </Box>
     </Box>
   );

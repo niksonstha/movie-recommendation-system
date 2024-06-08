@@ -131,13 +131,8 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Box
-        display="flex"
-        flexDirection="column"
-        position="relative"
-        height="130vh"
-      >
-        <Box position="relative" marginBottom={4}>
+      <Box display="flex" flexDirection="column" position="relative">
+        <Box position="relative" marginBottom={[150, 300]}>
           <Image
             src={`${import.meta.env.VITE_IMAGE_PATH}/original/${
               movie.backdrop_path
@@ -159,47 +154,61 @@ const MovieDetails = () => {
 
         <Box
           display="flex"
+          flexDirection={["column", "row"]}
           position="absolute"
           top={400}
           zIndex={20}
-          marginLeft={10}
+          margin={[0, 4]}
         >
           <Image
-            src={`${import.meta.env.VITE_IMAGE_PATH}/w500/${movie.poster_path}`}
+            src={`${import.meta.env.VITE_IMAGE_PATH}/original/${
+              movie.poster_path
+            }`}
             alt={movie.title}
-            marginBottom={4}
             borderRadius="md"
-            width="40%"
-            height="80vh"
+            width={["100%", "80%", "40%"]}
+            height={["30vh", "40vh", "70vh"]}
             objectFit="cover"
+            display={["none", "block"]}
           />
-          <Box marginLeft={5} width="50%">
-            <Text fontSize="3xl" fontWeight="bold">
+          <Box width={["100%", "80%", "50%"]} ml={[0, 0, 5]} mt={4} padding={2}>
+            <Text
+              fontSize={["xl", "2xl", "3xl", "4xl"]}
+              fontWeight="bold"
+              bgColor={"red"}
+              padding={1}
+              rounded={5}
+              width={"max-content"}
+            >
               {movie.title}
             </Text>
-            <Text fontSize="md" marginTop={2} textAlign="justify">
+            <Text fontSize={["sm", "md"]} marginTop={2} textAlign="justify">
               {movie.overview}
             </Text>
-            <Text fontSize="md" marginTop={2} color="gray.500">
+            <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
               Release date: {movie.release_date}
             </Text>
-            <Text fontSize="md" marginTop={2} color="gray.500">
+            <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
               Runtime: {movie.runtime} minutes
             </Text>
-            <Text fontSize="md" marginTop={2} color="gray.500">
+            <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
               Genres: {movie.genres.map((genre) => genre.name).join(", ")}
             </Text>
             {movie.tagline && (
-              <Text fontSize="md" marginTop={2} color="gray.500">
+              <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
                 Tagline: {movie.tagline}
               </Text>
             )}
-            <Badge fontSize="md" marginTop={2} colorScheme="green">
-              Vote Average: {movie.vote_average}
-            </Badge>
-            <Text fontSize="md" marginTop={2} color="gray.500">
-              Vote Count: {movie.vote_count}
-            </Text>
+            {movie.vote_average > 0 && (
+              <Badge fontSize={["sm", "md"]} marginTop={2} colorScheme="green">
+                Vote Average: {movie.vote_average}
+              </Badge>
+            )}
+            {movie.vote_count > 0 && (
+              <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
+                Vote Count: {movie.vote_count}
+              </Text>
+            )}
             <Button
               marginTop={4}
               display={"flex"}
@@ -217,7 +226,7 @@ const MovieDetails = () => {
           </Box>
         </Box>
       </Box>
-      <Box mt={70}>
+      <Box mt={[100, 80, 50, 20]}>
         {recommendations?.length > 0 && (
           <Box padding={5}>
             <Text fontSize="3xl" fontWeight="bold" marginBottom={3}>
@@ -225,7 +234,11 @@ const MovieDetails = () => {
             </Text>
             <Box
               display="grid"
-              gridTemplateColumns="repeat(3, 1fr)"
+              gridTemplateColumns={[
+                "repeat(1, 1fr)",
+                "repeat(2, 1fr)",
+                "repeat(3, 1fr)",
+              ]}
               gap={2}
               height={"max-content"}
             >

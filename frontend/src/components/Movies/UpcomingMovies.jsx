@@ -21,7 +21,7 @@ const UpcomingMovies = () => {
 
   return (
     <Box ml={5} mt={3}>
-      <Heading letterSpacing={4} mb={5}>
+      <Heading letterSpacing={4} mb={5} textAlign={"center"}>
         Upcoming Movies
       </Heading>
       <Grid

@@ -48,7 +48,7 @@ const LoginScreen = () => {
       if (response.data.success) {
         toast({
           title: "Login successful.",
-          description: `Welcome back, ${response.data.message}`,
+          description: response.data.message,
           status: "success",
           duration: 5000,
           isClosable: true,

@@ -21,7 +21,6 @@ const PopularMovies = () => {
 
   // Carousel settings
   const settings = {
-    dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 4, // Number of cards to show at once
