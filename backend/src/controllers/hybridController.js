@@ -33,6 +33,8 @@ const collaborativeFilteringRecommendations = async (userId) => {
     });
   });
 
+  console.log(recommendedMovies);
+
   return Array.from(recommendedMovies);
 };
 
@@ -56,8 +58,8 @@ const getHybridRecommendations = async (userId) => {
     await collaborativeFilteringRecommendations(userId);
   const contentRecommendations = await contentBasedRecommendations(userId);
 
-  //   console.log(collaborativeRecommendations);
-  //   console.log(contentRecommendations);
+  // console.log(collaborativeRecommendations);
+  console.log(contentRecommendations);
 
   const combinedRecommendations = [
     ...collaborativeRecommendations,
@@ -83,7 +85,6 @@ export const getRecommendations = async (req, res) => {
 
   try {
     const recommendations = await getHybridRecommendations(userId);
-    console.log(recommendations);
     res.json(recommendations);
   } catch (error) {
     console.error("Failed to get recommendations", error);

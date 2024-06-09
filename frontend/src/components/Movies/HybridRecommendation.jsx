@@ -26,7 +26,7 @@ const HybridRecommendation = () => {
 
   const getRecommendations = async () => {
     const response = await fetchHybridRecommendation(userId);
-    console.log(response);
+    console.log(response.data);
     setRecommendations(response.data);
   };
 

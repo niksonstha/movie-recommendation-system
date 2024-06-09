@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import watchlistMoviesRoutes from "./routes/watchlistMoviesRoutes.js";
 import hybridRoutes from "./routes/hybridRoutes.js";
+import timeAwareRoutes from "./routes/timeAwareRoutes.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/watchList", watchlistMoviesRoutes);
 app.use("/api/v1/recommendation", hybridRoutes);
+app.use("/api/v1/recommendation", timeAwareRoutes);
 
 // ? server start
 app.listen(process.env.PORT, () => {
