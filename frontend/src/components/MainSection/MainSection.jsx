@@ -11,6 +11,7 @@ import "./MainSection.css";
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
 import HybridRecommendation from "../Movies/HybridRecommendation";
+import TimeAwareRecommendation from "../Movies/TimeAwareRecommendation";
 
 const MainSection = () => {
   const [movies, setMovies] = useState([]);
@@ -198,6 +199,7 @@ const MainSection = () => {
         <PopularMovies />
         <TopRatedMovies />
         <HybridRecommendation />
+        <TimeAwareRecommendation />
       </Box>
     </Box>
   );

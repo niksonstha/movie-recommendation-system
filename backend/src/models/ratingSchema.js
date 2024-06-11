@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const ratingSchema = new mongoose.Schema(
   {
+    movieId: {
+      type: Number,
+      required: true,
+    },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-    },
-    movieId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Movie",
     },
     rating: Number,
   },

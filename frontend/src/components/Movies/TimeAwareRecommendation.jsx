@@ -1,21 +1,22 @@
 import {
+  Badge,
   Box,
-  Heading,
-  Image,
-  Text,
   Grid,
   GridItem,
+  Heading,
+  Image,
   Stack,
-  Badge,
+  Text,
 } from "@chakra-ui/react";
-import { fetchHybridRecommendation } from "../../api/recommendation";
 import { useEffect, useState } from "react";
+import { fetchTimeAwareRecommendation } from "../../api/recommendation";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 
-const HybridRecommendation = () => {
-  const [recommendations, setRecommendations] = useState([]);
+const TimeAwareRecommendation = () => {
+  const [timeRecommendation, setTimeRecommendation] = useState([]);
+
   const token = Cookies.get("uid");
   let userId = "";
 
@@ -24,17 +25,17 @@ const HybridRecommendation = () => {
     userId = decodedToken._id;
   }
 
-  const getRecommendations = async () => {
-    const response = await fetchHybridRecommendation(userId);
-    setRecommendations(response.data);
+  const getTimeAwareRecommendation = async () => {
+    const response = await fetchTimeAwareRecommendation(userId);
+    setTimeRecommendation(response.data);
   };
+  console.log(timeRecommendation);
 
   useEffect(() => {
-    getRecommendations();
+    getTimeAwareRecommendation();
   }, []);
-
   return (
-    <Box mt={3}>
+    <Box>
       <Heading
         letterSpacing={4}
         mb={5}
@@ -47,9 +48,8 @@ const HybridRecommendation = () => {
         fontSize={["0.9rem", "1.2rem"]}
         fontFamily={"poppins"}
       >
-        You may like this
+        Recommended for you
       </Heading>
-
       <Grid
         templateColumns={{
           base: "repeat(1, 1fr)", // 1 column for small screens
@@ -59,7 +59,7 @@ const HybridRecommendation = () => {
         }}
         gap={6}
       >
-        {recommendations.map((movie) => (
+        {timeRecommendation.map((movie) => (
           <GridItem key={movie.id}>
             <Box
               borderWidth="1px"
@@ -105,4 +105,4 @@ const HybridRecommendation = () => {
   );
 };
 
-export default HybridRecommendation;
+export default TimeAwareRecommendation;

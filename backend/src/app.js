@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import watchlistMoviesRoutes from "./routes/watchlistMoviesRoutes.js";
+import ratingRoutes from "./routes/ratingRoutes.js";
 import hybridRoutes from "./routes/hybridRoutes.js";
 import timeAwareRoutes from "./routes/timeAwareRoutes.js";
 
@@ -32,6 +33,7 @@ app.use(cookieParser());
 // ? routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/watchList", watchlistMoviesRoutes);
+app.use("/api/v1/rating", ratingRoutes);
 app.use("/api/v1/recommendation", hybridRoutes);
 app.use("/api/v1/recommendation", timeAwareRoutes);
 

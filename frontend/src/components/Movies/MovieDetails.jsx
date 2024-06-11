@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Image,
@@ -7,14 +8,16 @@ import {
   Badge,
   Button,
   useToast,
+  IconButton,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchGenres, movieDetail } from "../../api/movieApi";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaStar } from "react-icons/fa";
 import { addWatchlist } from "../../api/watchlistApi";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import { addRating, fetchUserRating } from "../../api/ratingApi";
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -25,6 +28,7 @@ const MovieDetails = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [genres, setGenres] = useState([]);
+  const [userRating, setUserRating] = useState(0);
 
   const toast = useToast();
   const token = Cookies.get("uid");
@@ -38,7 +42,6 @@ const MovieDetails = () => {
   const getGenres = async () => {
     const genresResponse = await fetchGenres();
     setGenres(genresResponse);
-    setLoading(false);
   };
 
   const getGenreNames = (genreIds) => {
@@ -53,13 +56,9 @@ const MovieDetails = () => {
   const getMovieDetails = async () => {
     try {
       const response = await movieDetail(movieId);
-      setMovie(response); // Ensure you set the state with response.data
-      setTimeout(() => {
-        setLoading(false);
-      }, 1500);
+      setMovie(response);
     } catch (error) {
       console.error("Failed to fetch movie details", error);
-      setLoading(false);
     }
   };
 
@@ -67,11 +66,37 @@ const MovieDetails = () => {
     try {
       const response = await movieDetail(movieId, true);
       setRecommendations(response);
-      setTimeout(() => {
-        setLoading(false);
-      }, 1500);
     } catch (error) {
       console.error("Failed to fetch recommendations", error);
+    }
+  };
+
+  const getUserRating = async () => {
+    try {
+      const response = await fetchUserRating(movieId, userId);
+      setUserRating(response.data.rating);
+    } catch (error) {
+      setUserRating(0);
+    }
+  };
+
+  const handleRating = async (rating) => {
+    try {
+      await addRating(movieId, userId, rating);
+      setUserRating(rating);
+      toast({
+        title: "Rating submitted!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: "Failed to submit rating",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -106,12 +131,13 @@ const MovieDetails = () => {
   };
 
   useEffect(() => {
-    if (queryParams) {
-      getMovieDetails();
-      getRecommendation();
-      getGenres();
-    }
-  }, [queryParams]);
+    setLoading(true);
+    getGenres();
+    getMovieDetails();
+    getRecommendation();
+    getUserRating();
+    setLoading(false);
+  }, [movieId]);
 
   if (loading) {
     return (
@@ -209,6 +235,21 @@ const MovieDetails = () => {
                 Vote Count: {movie.vote_count}
               </Text>
             )}
+            <Box display="flex" alignItems="center" marginTop={2}>
+              <Text fontSize={["sm", "md"]} marginRight={2} color="gray.500">
+                Your Rating:
+              </Text>
+              {[1, 2, 3, 4, 5].map((star) => (
+                <IconButton
+                  key={star}
+                  icon={<FaStar />}
+                  color={star <= userRating ? "yellow.400" : "gray.300"}
+                  onClick={() => handleRating(star)}
+                  variant="ghost"
+                  size="sm"
+                />
+              ))}
+            </Box>
             <Button
               marginTop={4}
               display={"flex"}
