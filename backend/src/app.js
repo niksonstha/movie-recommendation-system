@@ -9,6 +9,8 @@ import watchlistMoviesRoutes from "./routes/watchlistMoviesRoutes.js";
 import ratingRoutes from "./routes/ratingRoutes.js";
 import hybridRoutes from "./routes/hybridRoutes.js";
 import timeAwareRoutes from "./routes/timeAwareRoutes.js";
+import matrixFactorizationRoutes from "./routes/matrixFactorizationRoutes.js";
+import knnRoutes from "./routes/knnRoutes.js";
 
 const app = express();
 
@@ -20,6 +22,7 @@ connection()
   .catch((error) => {
     console.log(error);
   });
+  
 // ? Middleware
 app.use(
   cors({
@@ -36,6 +39,8 @@ app.use("/api/v1/watchList", watchlistMoviesRoutes);
 app.use("/api/v1/rating", ratingRoutes);
 app.use("/api/v1/recommendation", hybridRoutes);
 app.use("/api/v1/recommendation", timeAwareRoutes);
+app.use("/api/v1/recommendation", matrixFactorizationRoutes);
+app.use("/api/v1/recommendation", knnRoutes);
 
 // ? server start
 app.listen(process.env.PORT, () => {

@@ -54,7 +54,7 @@ const HybridRecommendation = () => {
         templateColumns={{
           base: "repeat(1, 1fr)", // 1 column for small screens
           md: "repeat(2, 1fr)", // 2 columns for medium screens
-          lg: "repeat(3, 1fr)", // 3 columns for large screens
+          lg: "repeat(4, 1fr)", // 3 columns for large screens
           xl: "repeat(4, 1fr)", // 4 columns for extra-large screens
         }}
         gap={6}
@@ -68,14 +68,14 @@ const HybridRecommendation = () => {
               boxShadow="md"
               mb={5}
               mx={2}
-              height={["80vh", "78vh", "85vh"]}
+              height={["80vh", "78vh", "85vh", "65vh"]}
             >
               <Link to={"/movieDetail?movieId=" + movie.id}>
                 <Image
                   src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
                   alt={movie.title}
                   width="100%"
-                  height={["60vh"]}
+                  height={["40vh"]}
                   objectFit="cover"
                 />
                 <Box p={5}>

@@ -80,9 +80,25 @@ const MovieDetails = () => {
     }
   };
 
-  const handleRating = async (rating) => {
+  const handleRating = async (
+    rating,
+    genre,
+    movieName,
+    poster_path,
+    release_date,
+    runtime
+  ) => {
     try {
-      await addRating(movieId, userId, rating);
+      await addRating(
+        movieId,
+        userId,
+        rating,
+        movieName,
+        genre,
+        poster_path,
+        release_date,
+        runtime
+      );
       setUserRating(rating);
       toast({
         title: "Rating submitted!",
@@ -244,7 +260,16 @@ const MovieDetails = () => {
                   key={star}
                   icon={<FaStar />}
                   color={star <= userRating ? "yellow.400" : "gray.300"}
-                  onClick={() => handleRating(star)}
+                  onClick={() =>
+                    handleRating(
+                      star,
+                      movie.genres.map((genre) => genre.name),
+                      movie.title,
+                      movie.poster_path,
+                      movie.release_date,
+                      movie.runtime
+                    )
+                  }
                   variant="ghost"
                   size="sm"
                 />

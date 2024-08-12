@@ -10,6 +10,7 @@ export const fetchHybridRecommendation = async (id) => {
     return error;
   }
 };
+
 export const fetchTimeAwareRecommendation = async (id) => {
   try {
     const response = await instance.get(

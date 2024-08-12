@@ -23,20 +23,40 @@ const PopularMovies = () => {
   const settings = {
     infinite: false,
     speed: 500,
-    slidesToShow: 4, // Number of cards to show at once
-    slidesToScroll: 4, // Number of cards to scroll
+    // slidesToShow: 4,
+    slidesToScroll: 4,
     responsive: [
       {
-        breakpoint: 1200,
+        breakpoint: 3000,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 7,
           slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 2000,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
         },
       },
       {
         breakpoint: 800,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 2,
         },
       },
@@ -53,7 +73,7 @@ const PopularMovies = () => {
   };
 
   return (
-    <Box ml={5} mt={3}>
+    <Box ml={{ base: 2, md: 5 }} mt={{ base: 2, md: 3 }}>
       <Heading letterSpacing={4} mb={5}>
         Popular Movies
       </Heading>

@@ -10,8 +10,8 @@ import { fetchMovies, searchMovies } from "../../api/movieApi";
 import "./MainSection.css";
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
-import HybridRecommendation from "../Movies/HybridRecommendation";
-import TimeAwareRecommendation from "../Movies/TimeAwareRecommendation";
+// import HybridRecommendation from "../Movies/HybridRecommendation";
+// import TimeAwareRecommendation from "../Movies/TimeAwareRecommendation";
 
 const MainSection = () => {
   const [movies, setMovies] = useState([]);
@@ -36,7 +36,7 @@ const MainSection = () => {
     } else {
       setSearchResults([]);
     }
-  }, 300);
+  }, 2000);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -198,8 +198,8 @@ const MainSection = () => {
       <Box mt={4}>
         <PopularMovies />
         <TopRatedMovies />
-        <HybridRecommendation />
-        <TimeAwareRecommendation />
+        {/* <HybridRecommendation />
+        <TimeAwareRecommendation /> */}
       </Box>
     </Box>
   );

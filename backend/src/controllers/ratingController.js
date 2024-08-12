@@ -2,7 +2,16 @@ import { Rating } from "../models/ratingSchema.js";
 
 export const addRating = async (req, res) => {
   try {
-    const { movieId, userId, rating } = req.body;
+    const {
+      movieId,
+      userId,
+      rating,
+      movieName,
+      genres,
+      poster_path,
+      release_date,
+      runtime,
+    } = req.body;
     console.log(req.body);
 
     // Check if the user has already rated this movie
@@ -14,7 +23,16 @@ export const addRating = async (req, res) => {
       await ratingDoc.save();
     } else {
       // Create a new rating entry
-      ratingDoc = await Rating.create({ movieId, userId, rating });
+      ratingDoc = await Rating.create({
+        movieId,
+        userId,
+        rating,
+        movieName,
+        genres,
+        poster_path,
+        release_date,
+        runtime,
+      });
     }
 
     res.status(201).json(ratingDoc);

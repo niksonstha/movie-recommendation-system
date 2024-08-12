@@ -64,12 +64,7 @@ export const changePassword = async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const { id } = req.query;
 
-    console.log("Received ID:", id);
-    console.log("Received Old Password:", oldPassword);
-    console.log("Received New Password:", newPassword);
-
     const user = await User.findById(id);
-    console.log(user);
 
     // Check if the user exists
     if (!user) {

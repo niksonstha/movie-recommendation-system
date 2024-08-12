@@ -18,6 +18,15 @@ const languageMap = {
   // Add more language mappings as needed
 };
 
+const breakpoints = {
+  base: "30em", // 0px
+  sm: "30em", // ~480px. em is a relative unit and is dependant on the font size.
+  md: "30em", // ~768px
+  lg: "20em", // ~992px
+  xl: "35em", // ~1280px
+  "2xl": "35em", // ~1536px
+};
+
 const MovieCard = ({ movie, isSliding }) => {
   const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true); // State to manage loading
@@ -69,7 +78,7 @@ const MovieCard = ({ movie, isSliding }) => {
         transition="transform 0.2s"
         _hover={{ transform: "scale(1.05)" }}
         m={2}
-        height={"80vh"}
+        height={breakpoints}
         cursor={"pointer"}
       >
         <Skeleton height="300px" width="100%" />
@@ -98,7 +107,7 @@ const MovieCard = ({ movie, isSliding }) => {
       transition="transform 0.2s"
       _hover={{ transform: "scale(1.05)" }}
       m={2}
-      height={["50vh", "80vh"]}
+      height={breakpoints}
       cursor={"pointer"}
     >
       <Link to={isSliding ? "/movieDetail?movieId=" + movie.id : ""}>

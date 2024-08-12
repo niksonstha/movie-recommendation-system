@@ -1,12 +1,25 @@
 import { instance } from "../axios/axios";
 
-export const addRating = async (movieId, userId, rating) => {
-  console.log(movieId, userId, rating);
+export const addRating = async (
+  movieId,
+  userId,
+  rating,
+  movieName,
+  genres,
+  poster_path,
+  release_date,
+  runtime
+) => {
   try {
     const response = await instance.post("/rating/addRating", {
       movieId,
       userId,
       rating,
+      movieName,
+      genres,
+      poster_path,
+      release_date,
+      runtime,
     });
     return response;
   } catch (error) {
