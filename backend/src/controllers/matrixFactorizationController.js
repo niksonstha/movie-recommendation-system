@@ -97,7 +97,7 @@ function svdRecommendationForUser(
   ratings,
   userIds
 ) {
-  const k = 5; // Number of latent factors
+  const k = 10; // Number of latent factors
   const genrePreferences = {}; // Store genre preferences for the user
 
   // Calculate genre preferences for the user based on their ratings
