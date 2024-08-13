@@ -42,7 +42,8 @@ const HomeScreen = () => {
 
       <Box
         ml={hideNavbar ? "15%" : "0"}
-        width={hideNavbar ? "85%" : "100%"}
+        width={hideNavbar ? "85%" : "80%"}
+        mx={hideNavbar ? "" : "auto"}
         transition={"all 0.3s ease"}
       >
         <Outlet />

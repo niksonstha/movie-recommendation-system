@@ -57,25 +57,19 @@ const KnnRecommendation = () => {
         templateColumns={{
           base: "repeat(1, 1fr)", // 1 column for small screens
           md: "repeat(2, 1fr)", // 2 columns for medium screens
-          lg: "repeat(3, 1fr)", // 3 columns for large screens
-          xl: "repeat(5, 1fr)", // 4 columns for extra-large screens
+          lg: "repeat(3, 1fr)", // 3 columns for large screens (laptops)
         }}
       >
         {knnrecommendRecommendation?.map((movie) => (
           <GridItem key={movie.movieId}>
-            <Box
-              borderRadius="lg"
-              boxShadow="md"
-              mb={5}
-              mx={2}
-              height={"150px"}
-            >
+            <Box borderRadius="lg" boxShadow="md" mb={5} mx={2}>
               <Link to={"/movieDetail?movieId=" + movie.movieId}>
                 <Box
                   display={"flex"}
                   alignItems={"center"}
                   bgColor={"white"}
                   color={"black"}
+                  height={"150px"}
                 >
                   <Image
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
@@ -87,7 +81,7 @@ const KnnRecommendation = () => {
                   <Box p={5}>
                     <Stack spacing={2}>
                       <Heading fontSize="xl" noOfLines={1}>
-                        {movie.title}
+                        {movie.movieName}
                       </Heading>
                       <Text fontSize="sm" color="gray.500">
                         {movie.release_date}

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Badge,
   Box,
@@ -56,7 +57,6 @@ const MatrixFactorRecommend = () => {
           base: "repeat(1, 1fr)", // 1 column for small screens
           md: "repeat(2, 1fr)", // 2 columns for medium screens
           lg: "repeat(3, 1fr)", // 3 columns for large screens
-          xl: "repeat(5, 1fr)", // 4 columns for extra-large screens
         }}
       >
         {matrixFactorRecommend?.map((movie, index) => (

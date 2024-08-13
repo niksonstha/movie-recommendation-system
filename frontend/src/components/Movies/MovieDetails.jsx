@@ -227,17 +227,17 @@ const MovieDetails = () => {
             <Text fontSize={["sm", "md"]} marginTop={2} textAlign="justify">
               {movie.overview}
             </Text>
-            <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
+            <Text fontSize={["sm", "md"]} marginTop={2}>
               Release date: {movie.release_date}
             </Text>
-            <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
+            <Text fontSize={["sm", "md"]} marginTop={2}>
               Runtime: {movie.runtime} minutes
             </Text>
-            <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
+            <Text fontSize={["sm", "md"]} marginTop={2}>
               Genres: {movie.genres.map((genre) => genre.name).join(", ")}
             </Text>
             {movie.tagline && (
-              <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
+              <Text fontSize={["sm", "md"]} marginTop={2}>
                 Tagline: {movie.tagline}
               </Text>
             )}
@@ -247,12 +247,12 @@ const MovieDetails = () => {
               </Badge>
             )}
             {movie.vote_count > 0 && (
-              <Text fontSize={["sm", "md"]} marginTop={2} color="gray.500">
+              <Text fontSize={["sm", "md"]} marginTop={2}>
                 Vote Count: {movie.vote_count}
               </Text>
             )}
             <Box display="flex" alignItems="center" marginTop={2}>
-              <Text fontSize={["sm", "md"]} marginRight={2} color="gray.500">
+              <Text fontSize={["sm", "md"]} marginRight={2}>
                 Your Rating:
               </Text>
               {[1, 2, 3, 4, 5].map((star) => (
