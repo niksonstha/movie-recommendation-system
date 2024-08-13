@@ -10,6 +10,8 @@ import { fetchMovies, searchMovies } from "../../api/movieApi";
 import "./MainSection.css";
 import { debounce } from "lodash";
 import { Link } from "react-router-dom";
+import MatrixFactorRecommend from "../Movies/MatrixFactorRecommend";
+import KnnRecommendation from "../Movies/KnnRecommendation";
 // import HybridRecommendation from "../Movies/HybridRecommendation";
 // import TimeAwareRecommendation from "../Movies/TimeAwareRecommendation";
 
@@ -200,6 +202,10 @@ const MainSection = () => {
         <TopRatedMovies />
         {/* <HybridRecommendation />
         <TimeAwareRecommendation /> */}
+        <Box mt={8}>
+          <MatrixFactorRecommend />
+          <KnnRecommendation />
+        </Box>
       </Box>
     </Box>
   );
